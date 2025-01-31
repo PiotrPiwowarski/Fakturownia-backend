@@ -5,7 +5,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.piwowarski.fakturowniabackend.dtos.AuthenticationDto;
 import pl.piwowarski.fakturowniabackend.dtos.GetCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.LoginDto;
 import pl.piwowarski.fakturowniabackend.dtos.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.services.Company.CompanyService;
 
@@ -30,6 +32,13 @@ public class CompanyController {
     public ResponseEntity<GetCompanyDto> getCompany(@PathVariable String nip) {
         GetCompanyDto getCompanyDto = companyService.getCompany(nip);
         return ResponseEntity.ok(getCompanyDto);
+    }
+
+    @Operation(summary = "Zalogowanie")
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationDto> login(@RequestBody LoginDto loginDto) {
+        AuthenticationDto authenticationDto = companyService.login(loginDto);
+        return ResponseEntity.ok(authenticationDto);
     }
 
     @Operation(summary = "Wylogowanie")
