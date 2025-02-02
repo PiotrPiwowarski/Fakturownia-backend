@@ -11,19 +11,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.piwowarski.fakturowniabackend.exceptions.NoCompaniesWithSuchIdException;
-import pl.piwowarski.fakturowniabackend.repository.CompanyRepository;
+import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchEmailException;
+import pl.piwowarski.fakturowniabackend.repository.UserRepository;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> companyRepository.findByEmail(username).orElseThrow(NoCompaniesWithSuchIdException::new);
+        return username -> userRepository.findByEmail(username).orElseThrow(NoUsersWithSuchEmailException::new);
     }
 
     @Bean

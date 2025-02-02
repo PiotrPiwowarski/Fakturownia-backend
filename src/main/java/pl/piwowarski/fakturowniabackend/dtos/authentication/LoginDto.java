@@ -1,4 +1,4 @@
-package pl.piwowarski.fakturowniabackend.dtos;
+package pl.piwowarski.fakturowniabackend.dtos.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,16 +2,15 @@ package pl.piwowarski.fakturowniabackend.mappers;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.piwowarski.fakturowniabackend.dtos.GetCompanyDto;
-import pl.piwowarski.fakturowniabackend.dtos.NewCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.entites.Company;
-import pl.piwowarski.fakturowniabackend.enums.Role;
+import pl.piwowarski.fakturowniabackend.entites.User;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CompanyMapper {
 
-    public static Company map(NewCompanyDto newCompanyDto, PasswordEncoder passwordEncoder) {
+    public static Company map(NewCompanyDto newCompanyDto, User user) {
         return Company.builder()
                 .companyName(newCompanyDto.getCompanyName())
                 .street(newCompanyDto.getStreet())
@@ -21,10 +20,7 @@ public final class CompanyMapper {
                 .nip(newCompanyDto.getNip())
                 .bankName(newCompanyDto.getBankName())
                 .bankAccountNumber(newCompanyDto.getBankAccountNumber())
-                .email(newCompanyDto.getEmail())
-                .phoneNumber(newCompanyDto.getPhoneNumber())
-                .password(passwordEncoder.encode(newCompanyDto.getPassword()))
-                .role(Role.USER)
+                .user(user)
                 .build();
     }
 
@@ -39,8 +35,7 @@ public final class CompanyMapper {
                 .nip(company.getNip())
                 .bankName(company.getBankName())
                 .bankAccountNumber(company.getBankAccountNumber())
-                .email(company.getEmail())
-                .phoneNumber(company.getPhoneNumber())
+                .userId(company.getUser().getId())
                 .build();
     }
 }

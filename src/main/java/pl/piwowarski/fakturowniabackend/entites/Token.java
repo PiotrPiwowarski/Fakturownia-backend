@@ -21,6 +21,6 @@ public class Token {
     @NotNull
     private String token;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private Company company;
+    @JoinColumn(name = "user_id")
+    private User user;
 }

@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers("/doc", "/swagger-ui/**", "/v3/api-docs/**", "/api/companies/register", "/api/companies/login", "/console/**")
+                                .requestMatchers("/doc", "/swagger-ui/**", "/v3/api-docs/**", "/api/users/register", "/api/users/login", "/console/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
-                .logout((logout) -> logout.logoutUrl("/api/companies/logout")
+                .logout((logout) -> logout.logoutUrl("/api/users/logout")
                         .addLogoutHandler(logoutHandler)
                         .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 );

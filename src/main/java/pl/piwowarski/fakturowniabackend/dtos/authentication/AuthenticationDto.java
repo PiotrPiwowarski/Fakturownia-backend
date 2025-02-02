@@ -1,4 +1,4 @@
-package pl.piwowarski.fakturowniabackend.dtos;
+package pl.piwowarski.fakturowniabackend.dtos.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,6 @@ import pl.piwowarski.fakturowniabackend.enums.Role;
 public class AuthenticationDto {
 
     private String token;
-    private long companyId;
+    private long userId;
     private Role role;
 }

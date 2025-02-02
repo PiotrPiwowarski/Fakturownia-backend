@@ -2,12 +2,12 @@ package pl.piwowarski.fakturowniabackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.piwowarski.fakturowniabackend.entites.Company;
+import pl.piwowarski.fakturowniabackend.entites.User;
 
 import java.util.Optional;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<Company> findByNip(String nip);
+    Optional<User> findByEmail(String email);
 }

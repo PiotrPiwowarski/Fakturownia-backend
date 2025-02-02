@@ -1,4 +1,4 @@
-package pl.piwowarski.fakturowniabackend.dtos;
+package pl.piwowarski.fakturowniabackend.dtos.company;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +20,5 @@ public class GetCompanyDto {
     private String nip;
     private String bankName;
     private String bankAccountNumber;
-    private String email;
-    private String phoneNumber;
+    private long userId;
 }

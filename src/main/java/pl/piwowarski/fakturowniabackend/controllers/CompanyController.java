@@ -5,16 +5,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.piwowarski.fakturowniabackend.dtos.AuthenticationDto;
-import pl.piwowarski.fakturowniabackend.dtos.GetCompanyDto;
-import pl.piwowarski.fakturowniabackend.dtos.LoginDto;
-import pl.piwowarski.fakturowniabackend.dtos.NewCompanyDto;
-import pl.piwowarski.fakturowniabackend.services.Company.CompanyService;
+import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
+import pl.piwowarski.fakturowniabackend.services.company.CompanyService;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/companies")
-@Tag(name = "Items API")
+@Tag(name = "Companies API")
 @CrossOrigin(origins="*", allowedHeaders = "*")
 public class CompanyController {
 
@@ -22,7 +20,7 @@ public class CompanyController {
 
     @Operation(summary = "Dodanie nowej firmy")
     @PostMapping("/register")
-    public ResponseEntity<Void> addUser(@RequestBody NewCompanyDto newCompanyDto) {
+    public ResponseEntity<Void> addCompany(@RequestBody NewCompanyDto newCompanyDto) {
         companyService.addNewCompany(newCompanyDto);
         return ResponseEntity.ok().build();
     }
@@ -32,18 +30,5 @@ public class CompanyController {
     public ResponseEntity<GetCompanyDto> getCompany(@PathVariable String nip) {
         GetCompanyDto getCompanyDto = companyService.getCompany(nip);
         return ResponseEntity.ok(getCompanyDto);
-    }
-
-    @Operation(summary = "Zalogowanie")
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationDto> login(@RequestBody LoginDto loginDto) {
-        AuthenticationDto authenticationDto = companyService.login(loginDto);
-        return ResponseEntity.ok(authenticationDto);
-    }
-
-    @Operation(summary = "Wylogowanie")
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout() {
-        return ResponseEntity.ok().build();
     }
 }
