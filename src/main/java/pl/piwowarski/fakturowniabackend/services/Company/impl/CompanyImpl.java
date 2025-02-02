@@ -68,6 +68,7 @@ public class CompanyImpl implements CompanyService {
         return AuthenticationDto.builder()
                 .token(jwtToken)
                 .companyId(company.getId())
+                .role(company.getRole())
                 .build();
     }
 
