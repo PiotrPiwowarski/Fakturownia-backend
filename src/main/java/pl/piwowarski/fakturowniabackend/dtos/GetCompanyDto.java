@@ -18,7 +18,6 @@ public class GetCompanyDto {
     private String postCode;
     private String city;
     private String nip;
-    private String regon;
     private String bankName;
     private String bankAccountNumber;
     private String email;
