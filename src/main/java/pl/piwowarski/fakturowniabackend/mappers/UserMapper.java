@@ -11,13 +11,13 @@ import pl.piwowarski.fakturowniabackend.enums.Role;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class UserMapper {
 
-    public static User map(NewUserDto newUserDto, PasswordEncoder passwordEncoder) {
+    public static User map(NewUserDto newUserDto, String encodedPassword) {
         return User.builder()
                 .firstName(newUserDto.getFirstName())
                 .lastName(newUserDto.getLastName())
                 .phoneNumber(newUserDto.getPhoneNumber())
                 .email(newUserDto.getEmail())
-                .password(passwordEncoder.encode(newUserDto.getPassword()))
+                .password(encodedPassword)
                 .role(Role.USER)
                 .build();
     }

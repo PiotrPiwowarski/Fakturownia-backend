@@ -5,16 +5,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
 public class NewInvoiceDto {
 
-    private String dateOfIssue;
-    private String dateOfSale;
+    private long userId;
+    private LocalDate dateOfIssue;
+    private LocalDate dateOfSale;
     private String originality;
     private String methodOfPayment;
+
     private String sellerCompanyName;
     private String sellerCompanyStreet;
     private String sellerCompanyBuildingNumber;
@@ -23,6 +28,7 @@ public class NewInvoiceDto {
     private String sellerCompanyNip;
     private String sellerCompanyBankName;
     private String sellerCompanyBankAccountNumber;
+
     private String buyerCompanyName;
     private String buyerCompanyStreet;
     private String buyerCompanyBuildingNumber;
@@ -31,4 +37,6 @@ public class NewInvoiceDto {
     private String buyerCompanyNip;
     private String buyerCompanyBankName;
     private String buyerCompanyBankAccountNumber;
+
+    private List<NewInvoicePosition> newInvoicePositionList;
 }

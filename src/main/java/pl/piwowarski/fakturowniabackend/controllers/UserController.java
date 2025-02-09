@@ -22,7 +22,7 @@ public class UserController {
 
     @Operation(summary = "Stworzenie konta")
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationDto> addUser(@RequestBody NewUserDto newUserDto) {
+    public ResponseEntity<Void> addUser(@RequestBody NewUserDto newUserDto) {
         userService.addUser(newUserDto);
         return ResponseEntity.ok().build();
     }

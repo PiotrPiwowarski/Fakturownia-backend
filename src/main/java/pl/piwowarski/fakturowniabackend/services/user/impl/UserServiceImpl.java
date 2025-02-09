@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
             throw new UserWithSuchEmailAlreadyExistsException();
         }
 
-        User user = UserMapper.map(newUserDto, passwordEncoder);
+        String encodedPassword = passwordEncoder.encode(newUserDto.getPassword());
+        User user = UserMapper.map(newUserDto, encodedPassword);
         userRepository.save(user);
     }
 
