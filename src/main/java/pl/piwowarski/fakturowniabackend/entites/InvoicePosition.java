@@ -2,19 +2,21 @@ package pl.piwowarski.fakturowniabackend.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.piwowarski.fakturowniabackend.enums.UnitOfMeasure;
+
+import java.math.BigDecimal;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "COMPANIES")
-public class Company {
+@Table(name = "INVOICE_POSITIONS")
+public class InvoicePosition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,22 +24,21 @@ public class Company {
     @NotNull
     private String name;
     @NotNull
-    private String street;
+    private BigDecimal amount;
     @NotNull
-    private String buildingNumber;
+    @Enumerated(EnumType.STRING)
+    private UnitOfMeasure unitOfMeasure;
     @NotNull
-    @Pattern(regexp = "^[0-9]{2}-[0-9]{3}$")
-    private String postCode;
+    private BigDecimal unitPrice;
     @NotNull
-    private String city;
+    private BigDecimal nettoValue;
     @NotNull
-    @Column(unique = true, length = 10)
-    private String nip;
-    private String bankName;
-    @Column(unique = true, length = 26)
-    private String accountNumber;
+    private Integer vatPercent;
     @NotNull
+    private BigDecimal vatValue;
+    @NotNull
+    private BigDecimal bruttoValue;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 }

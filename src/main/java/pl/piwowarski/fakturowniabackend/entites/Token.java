@@ -20,6 +20,7 @@ public class Token {
     private Long id;
     @NotNull
     private String token;
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

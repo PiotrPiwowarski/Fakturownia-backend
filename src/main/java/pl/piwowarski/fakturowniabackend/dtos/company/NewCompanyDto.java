@@ -18,6 +18,6 @@ public class NewCompanyDto {
     private String city;
     private String nip;
     private String bankName;
-    private String bankAccountNumber;
+    private String accountNumber;
     private long userId;
 }

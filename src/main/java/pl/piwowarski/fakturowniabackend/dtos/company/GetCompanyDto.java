@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 public class GetCompanyDto {
 
     private long id;
-    private String companyName;
+    private String name;
     private String street;
     private String buildingNumber;
     private String postCode;
     private String city;
     private String nip;
     private String bankName;
-    private String bankAccountNumber;
+    private String accountNumber;
     private long userId;
 }

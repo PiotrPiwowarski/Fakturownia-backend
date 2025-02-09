@@ -11,6 +11,7 @@ import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 import pl.piwowarski.fakturowniabackend.entites.Token;
 import pl.piwowarski.fakturowniabackend.entites.User;
+import pl.piwowarski.fakturowniabackend.exceptions.LoginFailureException;
 import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchEmailException;
 import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchIdException;
 import pl.piwowarski.fakturowniabackend.exceptions.UserWithSuchEmailAlreadyExistsException;
@@ -57,12 +58,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthenticationDto login(LoginDto loginDto) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginDto.getEmail(),
-                        loginDto.getPassword()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginDto.getEmail(),
+                            loginDto.getPassword()
+                    )
+            );
+        } catch(Exception e) {
+            throw new LoginFailureException();
+        }
         User user = userRepository
                 .findByEmail(loginDto.getEmail())
                 .orElseThrow(NoUsersWithSuchEmailException::new);

@@ -29,7 +29,7 @@ public class UserController {
 
     @Operation(summary = "Pobieranie konta po id")
     @GetMapping("/{id}")
-    public ResponseEntity<GetUserDto> addUser(@PathVariable long id) {
+    public ResponseEntity<GetUserDto> getUser(@PathVariable long id) {
         GetUserDto getUserDto = userService.getUserById(id);
         return ResponseEntity.ok(getUserDto);
     }

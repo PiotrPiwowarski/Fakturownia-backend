@@ -12,14 +12,14 @@ public final class CompanyMapper {
 
     public static Company map(NewCompanyDto newCompanyDto, User user) {
         return Company.builder()
-                .companyName(newCompanyDto.getCompanyName())
+                .name(newCompanyDto.getCompanyName())
                 .street(newCompanyDto.getStreet())
                 .buildingNumber(newCompanyDto.getBuildingNumber())
                 .postCode(newCompanyDto.getPostCode())
                 .city(newCompanyDto.getCity())
                 .nip(newCompanyDto.getNip())
                 .bankName(newCompanyDto.getBankName())
-                .bankAccountNumber(newCompanyDto.getBankAccountNumber())
+                .accountNumber(newCompanyDto.getAccountNumber())
                 .user(user)
                 .build();
     }
@@ -27,14 +27,14 @@ public final class CompanyMapper {
     public static GetCompanyDto map(Company company) {
         return GetCompanyDto.builder()
                 .id(company.getId())
-                .companyName(company.getCompanyName())
+                .name(company.getName())
                 .street(company.getStreet())
                 .buildingNumber(company.getBuildingNumber())
                 .postCode(company.getPostCode())
                 .city(company.getCity())
                 .nip(company.getNip())
                 .bankName(company.getBankName())
-                .bankAccountNumber(company.getBankAccountNumber())
+                .accountNumber(company.getAccountNumber())
                 .userId(company.getUser().getId())
                 .build();
     }

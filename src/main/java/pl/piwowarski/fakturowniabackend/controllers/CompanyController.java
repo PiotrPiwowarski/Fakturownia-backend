@@ -19,7 +19,7 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @Operation(summary = "Dodanie nowej firmy")
-    @PostMapping("/register")
+    @PostMapping("/add")
     public ResponseEntity<Void> addCompany(@RequestBody NewCompanyDto newCompanyDto) {
         companyService.addNewCompany(newCompanyDto);
         return ResponseEntity.ok().build();
