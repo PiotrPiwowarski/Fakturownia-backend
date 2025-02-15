@@ -3,6 +3,8 @@ package pl.piwowarski.fakturowniabackend.services.user.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.AuthenticationDto;
@@ -55,6 +57,12 @@ public class UserServiceImpl implements UserService {
         }
 
         return UserMapper.map(optionalUser.get());
+    }
+
+    @Override
+    public void deleteUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userRepository.delete(user);
     }
 
     @Override

@@ -46,4 +46,11 @@ public class UserController {
     public ResponseEntity<Void> logout() {
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "Usuwanie konta")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser() {
+        userService.deleteUser();
+        return ResponseEntity.ok().build();
+    }
 }
