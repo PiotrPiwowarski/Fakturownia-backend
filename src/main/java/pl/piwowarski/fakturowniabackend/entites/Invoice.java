@@ -35,6 +35,8 @@ public class Invoice {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
     @NotNull
+    private LocalDate deadlineOfPayment;
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_company_id")
     private Company buyerCompany;

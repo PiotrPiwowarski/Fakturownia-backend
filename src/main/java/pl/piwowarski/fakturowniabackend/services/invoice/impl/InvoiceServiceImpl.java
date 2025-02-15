@@ -45,12 +45,9 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice invoice = InvoiceMapper.map(newInvoiceDto, user, buyerCompany, sellerCompany);
         invoiceRepository.save(invoice);
 
-        List<InvoicePosition> positions = newInvoiceDto.getNewInvoicePositionList().stream()
-                .map(p -> InvoicePositionMapper.map(p, invoice))
-                .toList();
+        List<InvoicePosition> invoicePositions = newInvoiceDto.getNewInvoicePositionList().stream().map(position -> InvoicePositionMapper.map(position, invoice)).toList();
 
-        invoice.setInvoicePositions(positions);
-        invoicePositionRepository.saveAll(positions);
+        invoicePositionRepository.saveAll(invoicePositions);
     }
 }
 

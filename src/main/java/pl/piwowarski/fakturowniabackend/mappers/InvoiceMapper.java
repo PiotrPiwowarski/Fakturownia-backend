@@ -19,11 +19,11 @@ public final class InvoiceMapper {
                 .dateOfIssue(newInvoiceDto.getDateOfIssue())
                 .dateOfSale(newInvoiceDto.getDateOfSale())
                 .originality(Originality.valueOf(newInvoiceDto.getOriginality()))
+                .deadlineOfPayment(newInvoiceDto.getDeadlineOfPayment())
                 .paymentMethod(PaymentMethod.valueOf(newInvoiceDto.getMethodOfPayment()))
                 .buyerCompany(buyerCompany)
                 .sellerCompany(sellerCompany)
                 .user(user)
-                .invoicePositions(new ArrayList<>())
                 .build();
     }
 }

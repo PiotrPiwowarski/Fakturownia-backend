@@ -19,6 +19,7 @@ public class NewInvoiceDto {
     private LocalDate dateOfSale;
     private String originality;
     private String methodOfPayment;
+    private LocalDate deadlineOfPayment;
 
     private String sellerCompanyName;
     private String sellerCompanyStreet;
