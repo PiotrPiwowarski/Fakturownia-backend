@@ -2,6 +2,7 @@ package pl.piwowarski.fakturowniabackend.entites;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -32,13 +33,12 @@ public class User implements UserDetails {
     private String firstName;
     @NotNull
     private String lastName;
-    @Pattern(regexp = "^(\\+\\d{1,3}[- ]?)?\\d{7,15}$")
     private String phoneNumber;
     @NotNull
     @Email
     private String email;
     @NotNull
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+]).{8,}$")
+    @Min(value = 5)
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;

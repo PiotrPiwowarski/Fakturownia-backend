@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @Operation(summary = "Pobieranie konta po id")
-    @GetMapping("/{id}")
-    public ResponseEntity<GetUserDto> getUser(@PathVariable long id) {
-        GetUserDto getUserDto = userService.getUserById(id);
+    @GetMapping
+    public ResponseEntity<GetUserDto> getUser() {
+        GetUserDto getUserDto = userService.getUser();
         return ResponseEntity.ok(getUserDto);
     }
 

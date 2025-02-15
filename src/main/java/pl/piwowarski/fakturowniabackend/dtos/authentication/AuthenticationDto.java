@@ -13,6 +13,5 @@ import pl.piwowarski.fakturowniabackend.enums.Role;
 public class AuthenticationDto {
 
     private String token;
-    private long userId;
     private Role role;
 }

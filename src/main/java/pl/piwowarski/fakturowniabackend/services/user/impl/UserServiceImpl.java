@@ -13,10 +13,7 @@ import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 import pl.piwowarski.fakturowniabackend.entites.Token;
 import pl.piwowarski.fakturowniabackend.entites.User;
-import pl.piwowarski.fakturowniabackend.exceptions.LoginFailureException;
-import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchEmailException;
-import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchIdException;
-import pl.piwowarski.fakturowniabackend.exceptions.UserWithSuchEmailAlreadyExistsException;
+import pl.piwowarski.fakturowniabackend.exceptions.*;
 import pl.piwowarski.fakturowniabackend.mappers.UserMapper;
 import pl.piwowarski.fakturowniabackend.repository.TokenRepository;
 import pl.piwowarski.fakturowniabackend.repository.UserRepository;
@@ -49,19 +46,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public GetUserDto getUserById(long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if(optionalUser.isEmpty()) {
-            throw new NoUsersWithSuchIdException();
+    public GetUserDto getUser() {
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
         }
-
-        return UserMapper.map(optionalUser.get());
+        return UserMapper.map(user);
     }
 
     @Override
     public void deleteUser() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
+        }
         userRepository.delete(user);
     }
 
@@ -85,7 +87,6 @@ public class UserServiceImpl implements UserService {
         saveUserToken(jwtToken, user);
         return AuthenticationDto.builder()
                 .token(jwtToken)
-                .userId(user.getId())
                 .role(user.getRole())
                 .build();
     }

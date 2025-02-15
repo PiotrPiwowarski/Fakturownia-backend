@@ -10,9 +10,7 @@ import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 public interface UserService {
 
     AuthenticationDto login(LoginDto loginDto);
-
     void addUser(NewUserDto newUserDto);
-
-    GetUserDto getUserById(long id);
+    GetUserDto getUser();
     void deleteUser();
 }

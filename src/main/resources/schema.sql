@@ -6,7 +6,7 @@ CREATE TABLE USERS
     phone_number varchar(255),
     email varchar(255) not null UNIQUE,
     password varchar(255) not null,
-    role varchar(10) not null CHECK (role IN ('ADMIN', 'USER'))
+    role enum('ADMIN', 'USER')
 );
 
 CREATE TABLE COMPANIES

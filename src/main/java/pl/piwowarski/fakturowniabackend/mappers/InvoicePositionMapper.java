@@ -2,6 +2,7 @@ package pl.piwowarski.fakturowniabackend.mappers;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import pl.piwowarski.fakturowniabackend.dtos.invoice.GetInvoicePositionDto;
 import pl.piwowarski.fakturowniabackend.dtos.invoice.NewInvoicePosition;
 import pl.piwowarski.fakturowniabackend.entites.Invoice;
 import pl.piwowarski.fakturowniabackend.entites.InvoicePosition;
@@ -23,6 +24,20 @@ public final class InvoicePositionMapper {
                 .vatValue(new BigDecimal(newInvoicePosition.getVatValue()))
                 .bruttoValue(new BigDecimal(newInvoicePosition.getBruttoValue()))
                 .invoice(invoice)
+                .build();
+    }
+
+    public static GetInvoicePositionDto map(InvoicePosition position) {
+        return GetInvoicePositionDto.builder()
+                .id(position.getId())
+                .name(position.getName())
+                .amount(position.getAmount().toString())
+                .unitOfMeasure(position.getUnitOfMeasure().toString())
+                .unitPrice(position.getUnitPrice().toString())
+                .nettoValue(position.getNettoValue().toString())
+                .vatPercent(position.getVatPercent())
+                .vatValue(position.getVatValue().toString())
+                .bruttoValue(position.getBruttoValue().toString())
                 .build();
     }
 }
