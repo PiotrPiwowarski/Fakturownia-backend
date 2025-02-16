@@ -8,5 +8,5 @@ import java.util.List;
 @Service
 public interface CompanyService {
 
-    List<GetCompanyDto> getCompaniesByUserId(long userId);
+    List<GetCompanyDto> getUserCompanies();
 }

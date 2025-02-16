@@ -25,6 +25,8 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
+    private String invoiceNumber;
+    @NotNull
     private LocalDate dateOfIssue;
     @NotNull
     private LocalDate dateOfSale;

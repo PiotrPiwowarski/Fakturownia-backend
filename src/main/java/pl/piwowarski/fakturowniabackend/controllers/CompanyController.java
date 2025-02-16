@@ -20,9 +20,9 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @Operation(summary = "Pobranie listy firm")
-    @PostMapping("/{userId}")
-    public ResponseEntity<List<GetCompanyDto>> getCompaniesByUserId(@PathVariable long userId) {
-        List<GetCompanyDto> userCompanies = companyService.getCompaniesByUserId(userId);
+    @PostMapping
+    public ResponseEntity<List<GetCompanyDto>> getCompaniesByUserId() {
+        List<GetCompanyDto> userCompanies = companyService.getUserCompanies();
         return ResponseEntity.ok(userCompanies);
     }
 }

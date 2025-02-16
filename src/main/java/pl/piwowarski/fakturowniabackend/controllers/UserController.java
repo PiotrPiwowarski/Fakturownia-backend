@@ -27,7 +27,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Pobieranie konta po id")
+    @Operation(summary = "Pobieranie danych użytkownika")
     @GetMapping
     public ResponseEntity<GetUserDto> getUser() {
         GetUserDto getUserDto = userService.getUser();

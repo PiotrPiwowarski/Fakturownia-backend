@@ -15,6 +15,7 @@ import java.util.List;
 public class GetInvoiceDto {
 
     private long id;
+    private String invoiceNumber;
     private long userId;
     private LocalDate dateOfIssue;
     private LocalDate dateOfSale;
@@ -22,6 +23,9 @@ public class GetInvoiceDto {
     private String methodOfPayment;
     private LocalDate deadlineOfPayment;
 
+    private String sellerFirstName;
+    private String sellerLastName;
+    private String sellerEmail;
     private String sellerCompanyName;
     private String sellerCompanyStreet;
     private String sellerCompanyBuildingNumber;
@@ -41,4 +45,9 @@ public class GetInvoiceDto {
     private String buyerCompanyBankAccountNumber;
 
     private List<GetInvoicePositionDto> getInvoicePositionDtoList;
+
+    private String sumNetto;
+    private String sumVat;
+    private String sumBrutto;
+    private String totalToPay;
 }

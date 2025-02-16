@@ -20,13 +20,17 @@ public class LogoutService implements LogoutHandler {
     @Transactional
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        String authHeader = request.getHeader("Authorization");
-        String jwt;
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return;
+        try {
+            String authHeader = request.getHeader("Authorization");
+            String jwt;
+            if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return;
+            }
+            jwt = authHeader.substring(7);
+            Token token = tokenRepository.findByToken(jwt).orElseThrow(ThisTokenIsNotActiveException::new);
+            tokenRepository.delete(token);
+        } catch (Exception ignored) {
+
         }
-        jwt = authHeader.substring(7);
-        Token token = tokenRepository.findByToken(jwt).orElseThrow(ThisTokenIsNotActiveException::new);
-        tokenRepository.delete(token);
     }
 }

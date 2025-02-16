@@ -14,7 +14,6 @@ import java.util.List;
 @Builder
 public class NewInvoiceDto {
 
-    private long userId;
     private LocalDate dateOfIssue;
     private LocalDate dateOfSale;
     private String originality;

@@ -37,9 +37,12 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     @Transactional
     public void addInvoice(NewInvoiceDto newInvoiceDto) {
-        User user = userRepository.findById(newInvoiceDto.getUserId())
-                .orElseThrow(NoUsersWithSuchIdException::new);
-
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
+        }
         Company buyerCompany = companyRepository.findByNip(newInvoiceDto.getBuyerCompanyNip())
                 .orElseGet(() -> companyRepository.save(BuyerCompanyMapper.map(newInvoiceDto, user)));
 

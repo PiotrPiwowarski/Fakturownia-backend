@@ -27,6 +27,7 @@ CREATE TABLE COMPANIES
 CREATE TABLE INVOICES
 (
     id bigint primary key auto_increment,
+    invoice_number varchar(255) not null,
     date_of_issue date not null,
     date_of_sale date not null,
     originality enum('ORIGINAL', 'COPY') not null,
