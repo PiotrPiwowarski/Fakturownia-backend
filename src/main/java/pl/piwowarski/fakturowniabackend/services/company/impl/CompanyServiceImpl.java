@@ -8,7 +8,7 @@ import pl.piwowarski.fakturowniabackend.entites.Company;
 import pl.piwowarski.fakturowniabackend.entites.User;
 import pl.piwowarski.fakturowniabackend.exceptions.NoUserInSecurityContextHolderException;
 import pl.piwowarski.fakturowniabackend.mappers.CompanyMapper;
-import pl.piwowarski.fakturowniabackend.repository.UserRepository;
+import pl.piwowarski.fakturowniabackend.repository.CompanyRepository;
 import pl.piwowarski.fakturowniabackend.services.company.CompanyService;
 
 import java.util.List;
@@ -16,6 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class CompanyServiceImpl implements CompanyService {
+
+    private final CompanyRepository companyRepository;
 
     @Override
     public List<GetCompanyDto> getUserCompanies() {
@@ -25,7 +27,12 @@ public class CompanyServiceImpl implements CompanyService {
         } catch(Exception e) {
             throw new NoUserInSecurityContextHolderException();
         }
-        List<Company> companies = user.getCompanies();
+        List<Company> companies = companyRepository.findByUser(user);
         return companies.stream().map(CompanyMapper::map).toList();
+    }
+
+    @Override
+    public void deleteCompanyById(long id) {
+        companyRepository.deleteById(id);
     }
 }

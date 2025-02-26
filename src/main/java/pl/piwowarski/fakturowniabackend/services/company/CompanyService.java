@@ -9,4 +9,5 @@ import java.util.List;
 public interface CompanyService {
 
     List<GetCompanyDto> getUserCompanies();
+    void deleteCompanyById(long id);
 }

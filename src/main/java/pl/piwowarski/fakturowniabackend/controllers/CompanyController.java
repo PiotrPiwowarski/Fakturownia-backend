@@ -20,9 +20,16 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @Operation(summary = "Pobranie listy firm")
-    @PostMapping
+    @GetMapping
     public ResponseEntity<List<GetCompanyDto>> getCompaniesByUserId() {
         List<GetCompanyDto> userCompanies = companyService.getUserCompanies();
         return ResponseEntity.ok(userCompanies);
+    }
+
+    @Operation(summary = "Usuwanie firmy")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCompanyById(@PathVariable long id) {
+        companyService.deleteCompanyById(id);
+        return ResponseEntity.ok().build();
     }
 }

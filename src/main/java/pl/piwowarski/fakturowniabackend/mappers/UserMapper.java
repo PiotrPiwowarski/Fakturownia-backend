@@ -2,7 +2,6 @@ package pl.piwowarski.fakturowniabackend.mappers;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 import pl.piwowarski.fakturowniabackend.entites.User;
@@ -15,7 +14,7 @@ public final class UserMapper {
         return User.builder()
                 .firstName(newUserDto.getFirstName())
                 .lastName(newUserDto.getLastName())
-                .phoneNumber(newUserDto.getPhoneNumber())
+                .phoneNumber(newUserDto.getPhoneNumber().replaceAll("\\s", ""))
                 .email(newUserDto.getEmail())
                 .password(encodedPassword)
                 .role(Role.USER)

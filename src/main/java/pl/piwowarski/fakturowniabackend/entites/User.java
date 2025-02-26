@@ -1,10 +1,7 @@
 package pl.piwowarski.fakturowniabackend.entites;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,12 +30,14 @@ public class User implements UserDetails {
     private String firstName;
     @NotNull
     private String lastName;
+    @NotNull
     private String phoneNumber;
     @NotNull
     @Email
     private String email;
     @NotNull
-    @Min(value = 5)
+    @NotNull
+    @Size(min = 5)
     private String password;
     @Enumerated(value = EnumType.STRING)
     private Role role;

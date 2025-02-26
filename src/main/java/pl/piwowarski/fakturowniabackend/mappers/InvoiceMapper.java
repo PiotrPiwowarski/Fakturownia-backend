@@ -17,9 +17,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class InvoiceMapper {
 
-    //TODO: dorobić invoiceNumber do formularza tworzenia nowej faktury
     public static Invoice map(NewInvoiceDto newInvoiceDto, User user, Company buyerCompany, Company sellerCompany) {
         return Invoice.builder()
+                .invoiceNumber(newInvoiceDto.getInvoiceNumber())
                 .dateOfIssue(newInvoiceDto.getDateOfIssue())
                 .dateOfSale(newInvoiceDto.getDateOfSale())
                 .originality(Originality.valueOf(newInvoiceDto.getOriginality()))
