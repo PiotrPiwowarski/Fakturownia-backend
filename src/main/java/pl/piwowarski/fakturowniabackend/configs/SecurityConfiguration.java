@@ -43,7 +43,8 @@ public class SecurityConfiguration {
                                         "/api/users/login",
                                         "/console/**",
                                         "/api/users/logout",
-                                        "/api/users/sendResetPasswordToken")
+                                        "/api/users/sendResetPasswordToken",
+                                        "/api/users/resetPassword")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

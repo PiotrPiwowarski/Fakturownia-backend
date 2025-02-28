@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.AuthenticationDto;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.LoginDto;
 import pl.piwowarski.fakturowniabackend.dtos.passwordReset.GenerateResetPasswordTokenDto;
+import pl.piwowarski.fakturowniabackend.dtos.passwordReset.ResetPasswordDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 import pl.piwowarski.fakturowniabackend.services.passwordReset.PasswordResetService;
@@ -61,6 +62,13 @@ public class UserController {
     @PostMapping("/sendResetPasswordToken")
     public ResponseEntity<Void> generateResetPasswordToken(@RequestBody GenerateResetPasswordTokenDto generateResetPasswordTokenDto) {
         passwordResetService.generateResetPasswordToken(generateResetPasswordTokenDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Resetowanie hasła")
+    @PutMapping("/resetPassword")
+    public ResponseEntity<Void> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
+        passwordResetService.resetPassword(resetPasswordDto);
         return ResponseEntity.ok().build();
     }
 }
