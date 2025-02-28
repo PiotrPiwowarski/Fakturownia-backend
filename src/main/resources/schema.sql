@@ -59,7 +59,16 @@ CREATE TABLE INVOICE_POSITIONS
 CREATE TABLE TOKENS
 (
     id bigint primary key auto_increment,
-    token varchar(255) not null UNIQUE,
+    token varchar(255) not null,
     user_id bigint not null,
     FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE CASCADE
+);
+
+CREATE TABLE PASSWORD_RESET_TOKENS
+(
+    id bigint primary key  auto_increment,
+    token varchar(255) not null,
+    user_id bigint not null,
+    FOREIGN KEY  (user_id) REFERENCES USERS(id) ON DELETE CASCADE,
+    expiration_date_time datetime not null
 );

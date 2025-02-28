@@ -47,6 +47,8 @@ public class User implements UserDetails {
     private List<Company> companies = new ArrayList<>();
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Invoice> invoices = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PasswordResetToken> passwordResetTokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
