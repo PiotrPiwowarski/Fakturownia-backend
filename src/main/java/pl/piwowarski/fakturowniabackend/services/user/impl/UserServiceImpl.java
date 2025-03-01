@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
                     )
             );
         } catch(Exception e) {
-            throw new LoginFailureException();
+            throw new NoUsersWithSuchEmailException();
         }
         User user = userRepository
                 .findByEmail(loginDto.getEmail())

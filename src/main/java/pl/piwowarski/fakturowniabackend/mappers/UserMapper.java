@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
 import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
 import pl.piwowarski.fakturowniabackend.entites.User;
+import pl.piwowarski.fakturowniabackend.enums.PaymentPlan;
 import pl.piwowarski.fakturowniabackend.enums.Role;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,6 +19,7 @@ public final class UserMapper {
                 .email(newUserDto.getEmail())
                 .password(encodedPassword)
                 .role(Role.USER)
+                .paymentPlan(PaymentPlan.valueOf(newUserDto.getPaymentPlan()))
                 .build();
     }
 

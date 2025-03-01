@@ -25,12 +25,6 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 
-    @ExceptionHandler(LoginFailureException.class)
-    public ResponseEntity<String> handle(LoginFailureException exception) {
-        logger.error("Logowanie błędu: ", exception);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
-    }
-
     @ExceptionHandler(NoCompaniesWithSuchNipException.class)
     public ResponseEntity<String> handle(NoCompaniesWithSuchNipException exception) {
         logger.error("Logowanie błędu: ", exception);

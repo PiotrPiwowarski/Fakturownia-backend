@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.piwowarski.fakturowniabackend.enums.PaymentPlan;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +27,6 @@ public class NewUserDto {
     @NotNull
     @Size(min = 5)
     private String password;
+    @NotNull
+    private String paymentPlan;
 }

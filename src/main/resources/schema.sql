@@ -6,7 +6,8 @@ CREATE TABLE USERS
     phone_number varchar(255) not null,
     email varchar(255) not null UNIQUE,
     password varchar(255) not null,
-    role enum('ADMIN', 'USER')
+    role enum('ADMIN', 'USER') not null,
+    payment_plan enum('LITE', 'PRO') not null
 );
 
 CREATE TABLE COMPANIES
