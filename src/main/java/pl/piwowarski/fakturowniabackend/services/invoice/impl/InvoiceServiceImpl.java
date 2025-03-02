@@ -5,14 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piwowarski.fakturowniabackend.dtos.invoice.GetInvoiceDto;
-import pl.piwowarski.fakturowniabackend.dtos.invoice.GetInvoicePositionDto;
+import pl.piwowarski.fakturowniabackend.dtos.invoice.GetStatisticsDto;
 import pl.piwowarski.fakturowniabackend.dtos.invoice.NewInvoiceDto;
 import pl.piwowarski.fakturowniabackend.entites.Company;
 import pl.piwowarski.fakturowniabackend.entites.Invoice;
 import pl.piwowarski.fakturowniabackend.entites.InvoicePosition;
 import pl.piwowarski.fakturowniabackend.entites.User;
 import pl.piwowarski.fakturowniabackend.exceptions.NoUserInSecurityContextHolderException;
-import pl.piwowarski.fakturowniabackend.exceptions.NoUsersWithSuchIdException;
 import pl.piwowarski.fakturowniabackend.mappers.BuyerCompanyMapper;
 import pl.piwowarski.fakturowniabackend.mappers.InvoiceMapper;
 import pl.piwowarski.fakturowniabackend.mappers.InvoicePositionMapper;
@@ -23,6 +22,8 @@ import pl.piwowarski.fakturowniabackend.repository.InvoiceRepository;
 import pl.piwowarski.fakturowniabackend.repository.UserRepository;
 import pl.piwowarski.fakturowniabackend.services.invoice.InvoiceService;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -67,6 +68,24 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         List<Invoice> invoices = invoiceRepository.findByUser(user);
         return invoices.stream().map(InvoiceMapper::map).toList();
+    }
+
+    @Override
+    public GetStatisticsDto getStatistics() {
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
+        }
+        List<Invoice> userInvoices = invoiceRepository.findByUser(user);
+        BigDecimal sumNetto = userInvoices.stream().map(Invoice::getSumNetto).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return GetStatisticsDto.builder()
+                .amount(userInvoices.size())
+                .sumNettoValue(sumNetto.toString())
+                .averageInvoiceValue(sumNetto.divide(BigDecimal.valueOf(userInvoices.size()), RoundingMode.HALF_UP).toString())
+                .build();
     }
 }
 

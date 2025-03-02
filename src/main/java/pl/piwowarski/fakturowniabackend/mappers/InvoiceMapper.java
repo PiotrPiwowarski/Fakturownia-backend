@@ -45,7 +45,7 @@ public final class InvoiceMapper {
                 .map(InvoicePosition::getVatValue)
                 .reduce(BigDecimal.ZERO, BigDecimal::add).toString();
 
-        String brutto = positions.stream()
+        String sumBrutto = positions.stream()
                 .map(InvoicePosition::getBruttoValue)
                 .reduce(BigDecimal.ZERO, BigDecimal::add).toString();
 
@@ -85,8 +85,8 @@ public final class InvoiceMapper {
                 .getInvoicePositionDtoList(invoice.getInvoicePositions().stream().map(InvoicePositionMapper::map).toList())
                 .sumNetto(sumNetto)
                 .sumVat(sumVat)
-                .sumBrutto(brutto)
-                .totalToPay(brutto)
+                .sumBrutto(sumBrutto)
+                .totalToPay(sumBrutto)
                 .build();
     }
 }

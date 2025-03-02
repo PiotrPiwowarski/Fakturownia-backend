@@ -37,6 +37,9 @@ CREATE TABLE INVOICES
     buyer_company_id bigint not null,
     seller_company_id bigint not null,
     user_id bigint not null,
+    sum_netto decimal(10,2) not null,
+    sum_brutto decimal(10,2) not null,
+    sum_vat decimal(10,2) not null,
     FOREIGN KEY (buyer_company_id) REFERENCES COMPANIES(id),
     FOREIGN KEY (seller_company_id) REFERENCES COMPANIES(id),
     FOREIGN KEY (user_id) REFERENCES USERS(id)

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import pl.piwowarski.fakturowniabackend.enums.Originality;
 import pl.piwowarski.fakturowniabackend.enums.PaymentMethod;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,4 +53,10 @@ public class Invoice {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    @NotNull
+    private BigDecimal sumNetto;
+    @NotNull
+    private BigDecimal sumBrutto;
+    @NotNull
+    private BigDecimal sumVat;
 }

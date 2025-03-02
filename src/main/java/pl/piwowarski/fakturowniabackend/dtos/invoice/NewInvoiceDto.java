@@ -39,5 +39,9 @@ public class NewInvoiceDto {
     private String buyerCompanyBankName;
     private String buyerCompanyBankAccountNumber;
 
+    private String sumNetto;
+    private String sumBrutto;
+    private String sumVat;
+
     private List<NewInvoicePosition> newInvoicePositionList;
 }

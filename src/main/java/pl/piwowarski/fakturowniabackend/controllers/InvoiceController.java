@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.piwowarski.fakturowniabackend.dtos.invoice.GetInvoiceDto;
-import pl.piwowarski.fakturowniabackend.dtos.invoice.GetInvoicePositionDto;
+import pl.piwowarski.fakturowniabackend.dtos.invoice.GetStatisticsDto;
 import pl.piwowarski.fakturowniabackend.dtos.invoice.NewInvoiceDto;
 import pl.piwowarski.fakturowniabackend.services.invoice.InvoiceService;
 
@@ -33,5 +33,12 @@ public class InvoiceController {
     public ResponseEntity<List<GetInvoiceDto>> getUserInvoices() {
         List<GetInvoiceDto> getInvoiceDto = invoiceService.getUserInvoices();
         return ResponseEntity.ok(getInvoiceDto);
+    }
+
+    @Operation(summary = "Pobieranie statystyk")
+    @GetMapping("/amount")
+    public ResponseEntity<GetStatisticsDto> getStatistics() {
+        GetStatisticsDto getStatisticsDto = invoiceService.getStatistics();
+        return ResponseEntity.ok(getStatisticsDto);
     }
 }
