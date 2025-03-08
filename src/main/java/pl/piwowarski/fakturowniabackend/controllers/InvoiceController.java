@@ -36,9 +36,16 @@ public class InvoiceController {
     }
 
     @Operation(summary = "Pobieranie statystyk")
-    @GetMapping("/amount")
-    public ResponseEntity<GetStatisticsDto> getStatistics() {
-        GetStatisticsDto getStatisticsDto = invoiceService.getStatistics();
+    @GetMapping("/statistics")
+    public ResponseEntity<GetStatisticsDto> getUserStatistics() {
+        GetStatisticsDto getStatisticsDto = invoiceService.getUserStatistics();
         return ResponseEntity.ok(getStatisticsDto);
+    }
+
+    @Operation(summary = "Usuwanie faktury")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteInvoice(@PathVariable long id) {
+        invoiceService.deleteInvoice(id);
+        return ResponseEntity.ok().build();
     }
 }

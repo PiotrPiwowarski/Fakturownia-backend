@@ -39,11 +39,9 @@ public class Invoice {
     private PaymentMethod paymentMethod;
     @NotNull
     private LocalDate deadlineOfPayment;
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_company_id")
     private Company buyerCompany;
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_company_id")
     private Company sellerCompany;

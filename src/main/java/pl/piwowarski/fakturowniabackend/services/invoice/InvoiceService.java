@@ -11,5 +11,6 @@ import java.util.List;
 public interface InvoiceService {
     void addInvoice(NewInvoiceDto newInvoiceDto);
     List<GetInvoiceDto> getUserInvoices();
-    GetStatisticsDto getStatistics();
+    GetStatisticsDto getUserStatistics();
+    void deleteInvoice(long id);
 }

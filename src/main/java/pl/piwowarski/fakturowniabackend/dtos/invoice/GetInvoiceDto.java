@@ -49,5 +49,4 @@ public class GetInvoiceDto {
     private String sumNetto;
     private String sumVat;
     private String sumBrutto;
-    private String totalToPay;
 }

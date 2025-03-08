@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.piwowarski.fakturowniabackend.enums.PaymentPlan;
 import pl.piwowarski.fakturowniabackend.enums.Role;
 
 @NoArgsConstructor
@@ -13,5 +14,6 @@ import pl.piwowarski.fakturowniabackend.enums.Role;
 public class AuthenticationDto {
 
     private String token;
-    private Role role;
+    private String paymentPlan;
+    private String role;
 }

@@ -28,26 +28,15 @@ public final class InvoiceMapper {
                 .buyerCompany(buyerCompany)
                 .sellerCompany(sellerCompany)
                 .user(user)
+                .sumNetto(new BigDecimal(newInvoiceDto.getSumNetto()))
+                .sumBrutto(new BigDecimal(newInvoiceDto.getSumBrutto()))
+                .sumVat(new BigDecimal(newInvoiceDto.getSumVat()))
                 .build();
     }
 
     public static GetInvoiceDto map(Invoice invoice) {
         Company sellerCompany = invoice.getSellerCompany();
         Company buyerCompany = invoice.getBuyerCompany();
-
-        List<InvoicePosition> positions = invoice.getInvoicePositions();
-
-        String sumNetto = positions.stream()
-                .map(InvoicePosition::getNettoValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add).toString();
-
-        String sumVat = positions.stream()
-                .map(InvoicePosition::getVatValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add).toString();
-
-        String sumBrutto = positions.stream()
-                .map(InvoicePosition::getBruttoValue)
-                .reduce(BigDecimal.ZERO, BigDecimal::add).toString();
 
         User user = invoice.getUser();
         String sellerFirstName = user.getFirstName();
@@ -83,10 +72,9 @@ public final class InvoiceMapper {
                 .buyerCompanyBankName(buyerCompany.getBankName())
                 .buyerCompanyBankAccountNumber(buyerCompany.getAccountNumber())
                 .getInvoicePositionDtoList(invoice.getInvoicePositions().stream().map(InvoicePositionMapper::map).toList())
-                .sumNetto(sumNetto)
-                .sumVat(sumVat)
-                .sumBrutto(sumBrutto)
-                .totalToPay(sumBrutto)
+                .sumNetto(invoice.getSumNetto().toString())
+                .sumVat(invoice.getSumVat().toString())
+                .sumBrutto(invoice.getSumBrutto().toString())
                 .build();
     }
 }

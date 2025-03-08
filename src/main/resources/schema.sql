@@ -40,9 +40,9 @@ CREATE TABLE INVOICES
     sum_netto decimal(10,2) not null,
     sum_brutto decimal(10,2) not null,
     sum_vat decimal(10,2) not null,
-    FOREIGN KEY (buyer_company_id) REFERENCES COMPANIES(id),
-    FOREIGN KEY (seller_company_id) REFERENCES COMPANIES(id),
-    FOREIGN KEY (user_id) REFERENCES USERS(id)
+    FOREIGN KEY (buyer_company_id) REFERENCES COMPANIES(id) on delete cascade,
+    FOREIGN KEY (seller_company_id) REFERENCES COMPANIES(id) on delete cascade,
+    FOREIGN KEY (user_id) REFERENCES USERS(id) on delete cascade
 );
 
 CREATE TABLE INVOICE_POSITIONS

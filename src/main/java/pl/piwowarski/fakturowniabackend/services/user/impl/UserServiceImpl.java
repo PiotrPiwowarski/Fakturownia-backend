@@ -87,7 +87,8 @@ public class UserServiceImpl implements UserService {
         saveUserToken(jwtToken, user);
         return AuthenticationDto.builder()
                 .token(jwtToken)
-                .role(user.getRole())
+                .paymentPlan(user.getPaymentPlan().toString())
+                .role(user.getRole().toString())
                 .build();
     }
 
