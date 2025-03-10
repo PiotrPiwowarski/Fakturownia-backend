@@ -3,8 +3,7 @@ package pl.piwowarski.fakturowniabackend.services.user;
 import org.springframework.stereotype.Service;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.AuthenticationDto;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.LoginDto;
-import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
-import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
+import pl.piwowarski.fakturowniabackend.dtos.user.*;
 
 @Service
 public interface UserService {
@@ -13,4 +12,8 @@ public interface UserService {
     void addUser(NewUserDto newUserDto);
     GetUserDto getUser();
     void deleteUser();
+    void updateUser(UpdateUserDto updateUserDto);
+    GetPaymentPlanDto getPaymentPlan();
+    void updatePassword(UpdatePasswordDto updatePasswordDto);
+    void updatePaymentPlanDto(UpdatePaymentPlanDto updatePaymentPlanDto);
 }

@@ -9,8 +9,7 @@ import pl.piwowarski.fakturowniabackend.dtos.authentication.AuthenticationDto;
 import pl.piwowarski.fakturowniabackend.dtos.authentication.LoginDto;
 import pl.piwowarski.fakturowniabackend.dtos.passwordReset.GenerateResetPasswordTokenDto;
 import pl.piwowarski.fakturowniabackend.dtos.passwordReset.ResetPasswordDto;
-import pl.piwowarski.fakturowniabackend.dtos.user.GetUserDto;
-import pl.piwowarski.fakturowniabackend.dtos.user.NewUserDto;
+import pl.piwowarski.fakturowniabackend.dtos.user.*;
 import pl.piwowarski.fakturowniabackend.services.passwordReset.PasswordResetService;
 import pl.piwowarski.fakturowniabackend.services.user.UserService;
 
@@ -69,6 +68,34 @@ public class UserController {
     @PutMapping("/resetPassword")
     public ResponseEntity<Void> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
         passwordResetService.resetPassword(resetPasswordDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Edycja danych użytkownika")
+    @PutMapping
+    public ResponseEntity<Void> updateUser(@RequestBody UpdateUserDto updateUserDto) {
+        userService.updateUser(updateUserDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary ="Pobieranie planu płatniczego")
+    @GetMapping("/paymentPlan")
+    public ResponseEntity<GetPaymentPlanDto> getPlan() {
+        GetPaymentPlanDto getPaymentPlanDto = userService.getPaymentPlan();
+        return ResponseEntity.ok(getPaymentPlanDto);
+    }
+
+    @Operation(summary = "Zmiana hasła")
+    @PutMapping("/password")
+    public ResponseEntity<Void> updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
+        userService.updatePassword(updatePasswordDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Zmiana planu")
+    @PutMapping("/paymentPlan")
+    public ResponseEntity<Void> updatePaymentPlan(@RequestBody UpdatePaymentPlanDto updatePaymentPlanDto) {
+        userService.updatePaymentPlanDto(updatePaymentPlanDto);
         return ResponseEntity.ok().build();
     }
 }
