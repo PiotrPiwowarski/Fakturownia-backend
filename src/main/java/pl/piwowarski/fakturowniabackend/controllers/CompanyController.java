@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.services.company.CompanyService;
 
 import java.util.List;
@@ -24,6 +25,13 @@ public class CompanyController {
     public ResponseEntity<List<GetCompanyDto>> getCompaniesByUserId() {
         List<GetCompanyDto> userCompanies = companyService.getUserCompanies();
         return ResponseEntity.ok(userCompanies);
+    }
+
+    @Operation(summary = "Dodanie firmy")
+    @PostMapping
+    public ResponseEntity<Void> addCompany(@RequestBody NewCompanyDto newCompanyDto) {
+        companyService.addCompany(newCompanyDto);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "Usuwanie firmy")

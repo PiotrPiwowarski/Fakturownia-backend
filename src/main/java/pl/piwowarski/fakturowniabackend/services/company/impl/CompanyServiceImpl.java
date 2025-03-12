@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
+import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.entites.Company;
 import pl.piwowarski.fakturowniabackend.entites.User;
 import pl.piwowarski.fakturowniabackend.exceptions.NoPermissionToPerformTheOperation;
@@ -53,5 +54,17 @@ public class CompanyServiceImpl implements CompanyService {
         invoiceRepository.deleteAllBySellerCompany(company);
         invoiceRepository.deleteAllByBuyerCompany(company);
         companyRepository.delete(company);
+    }
+
+    @Override
+    public void addCompany(NewCompanyDto newCompanyDto) {
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
+        }
+        Company company = CompanyMapper.map(newCompanyDto, user);
+        companyRepository.save(company);
     }
 }

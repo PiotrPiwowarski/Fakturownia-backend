@@ -20,7 +20,7 @@ CREATE TABLE COMPANIES
     city varchar(255) not null,
     nip varchar(10) not null,
     bank_name varchar(255),
-    account_number varchar(255) UNIQUE,
+    account_number varchar(255),
     user_id bigint not null,
     FOREIGN KEY (user_id) REFERENCES USERS(id) ON DELETE CASCADE
 );
