@@ -2,6 +2,7 @@ package pl.piwowarski.fakturowniabackend.mappers;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import pl.piwowarski.fakturowniabackend.dtos.company.EditCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.entites.Company;
@@ -38,4 +39,20 @@ public final class CompanyMapper {
                 .userId(company.getUser().getId())
                 .build();
     }
+
+    public static Company map(EditCompanyDto editCompanyDto, User user) {
+        return Company.builder()
+                .id(editCompanyDto.getId())
+                .name(editCompanyDto.getName())
+                .street(editCompanyDto.getStreet())
+                .buildingNumber(editCompanyDto.getBuildingNumber())
+                .postCode(editCompanyDto.getPostCode())
+                .city(editCompanyDto.getCity())
+                .nip(editCompanyDto.getNip())
+                .bankName(editCompanyDto.getBankName())
+                .accountNumber(editCompanyDto.getAccountNumber())
+                .user(user)
+                .build();
+    }
+
 }

@@ -1,6 +1,7 @@
 package pl.piwowarski.fakturowniabackend.services.company;
 
 import org.springframework.stereotype.Service;
+import pl.piwowarski.fakturowniabackend.dtos.company.EditCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 
@@ -12,4 +13,5 @@ public interface CompanyService {
     List<GetCompanyDto> getUserCompanies();
     void deleteCompanyById(long id);
     void addCompany(NewCompanyDto newCompanyDto);
+    void editCompany(EditCompanyDto editCompanyDto);
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.piwowarski.fakturowniabackend.dtos.company.EditCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.entites.Company;
@@ -65,6 +66,22 @@ public class CompanyServiceImpl implements CompanyService {
             throw new NoUserInSecurityContextHolderException();
         }
         Company company = CompanyMapper.map(newCompanyDto, user);
+        companyRepository.save(company);
+    }
+
+    @Override
+    public void editCompany(EditCompanyDto editCompanyDto) {
+        User user;
+        try {
+            user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch(Exception e) {
+            throw new NoUserInSecurityContextHolderException();
+        }
+        Optional<Company> optionalCompany = companyRepository.findByIdAndUser(editCompanyDto.getId(), user);
+        if(optionalCompany.isEmpty()) {
+            throw new NoPermissionToPerformTheOperation();
+        }
+        Company company = CompanyMapper.map(editCompanyDto, user);
         companyRepository.save(company);
     }
 }

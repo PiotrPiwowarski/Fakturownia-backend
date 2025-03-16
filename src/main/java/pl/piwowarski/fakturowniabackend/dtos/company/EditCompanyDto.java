@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class GetCompanyDto {
+public class EditCompanyDto {
 
     private long id;
     @NotNull
@@ -27,5 +27,4 @@ public class GetCompanyDto {
     private String nip;
     private String bankName;
     private String accountNumber;
-    private long userId;
 }

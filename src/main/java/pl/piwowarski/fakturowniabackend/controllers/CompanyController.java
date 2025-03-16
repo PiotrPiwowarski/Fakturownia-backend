@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.piwowarski.fakturowniabackend.dtos.company.EditCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.GetCompanyDto;
 import pl.piwowarski.fakturowniabackend.dtos.company.NewCompanyDto;
 import pl.piwowarski.fakturowniabackend.services.company.CompanyService;
@@ -38,6 +39,13 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCompanyById(@PathVariable long id) {
         companyService.deleteCompanyById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "Edytowanie firmy")
+    @PutMapping
+    public ResponseEntity<Void> editCompany(@RequestBody EditCompanyDto editCompanyDto) {
+        companyService.editCompany(editCompanyDto);
         return ResponseEntity.ok().build();
     }
 }
